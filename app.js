@@ -86,10 +86,26 @@ if (scanCodigoBtn) {
         });
         window.Quagga.onDetected(function(result) {
           if (result && result.codeResult && result.codeResult.code) {
-            codigoInput.value = result.codeResult.code;
-            window.Quagga.stop();
-            scannerDiv.innerHTML = "";
-            buscarCodigo();
+            // Animación de éxito visual
+            const overlay = document.createElement("div");
+            overlay.style.position = "absolute";
+            overlay.style.top = "0";
+            overlay.style.left = "0";
+            overlay.style.width = "100%";
+            overlay.style.height = "100%";
+            overlay.style.background = "rgba(76,175,80,0.7)";
+            overlay.style.display = "flex";
+            overlay.style.alignItems = "center";
+            overlay.style.justifyContent = "center";
+            overlay.style.zIndex = "100";
+            overlay.innerHTML = '<div style="color:#fff;font-size:2em;font-weight:bold;text-align:center;">✔ Código leído<br><span style="font-size:1.2em;">' + result.codeResult.code + '</span></div>';
+            scannerDiv.appendChild(overlay);
+            setTimeout(() => {
+              codigoInput.value = result.codeResult.code;
+              window.Quagga.stop();
+              scannerDiv.innerHTML = "";
+              buscarCodigo();
+            }, 1200);
           }
         });
       } else {
