@@ -331,7 +331,14 @@ window.addEventListener("DOMContentLoaded", async () => {
           const mm = String(fecha.getMinutes()).padStart(2, '0');
           const ss = String(fecha.getSeconds()).padStart(2, '0');
           const fechaFormateada = `${yyyy}-${MM}-${dd} ${hh}:${mm}:${ss}`;
-          leyenda.innerHTML = `&#128260; ${fechaFormateada}`;
+          // Calcular si la fecha es menor a 1 día
+          const ahora = new Date();
+          const diffMs = ahora - fecha;
+          const unDiaMs = 24 * 60 * 60 * 1000;
+          const icono = diffMs < unDiaMs
+            ? '<span style="color:#d32f2f;font-size:1.1em;vertical-align:middle;">&#128260;</span>'
+            : '<span style="color:inherit;font-size:1.1em;vertical-align:middle;">&#128260;</span>';
+          leyenda.innerHTML = `${icono} ${fechaFormateada}`;
         }
       }
     } catch (e) {
