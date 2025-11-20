@@ -122,6 +122,7 @@ const resultsEl = document.getElementById("results");
 const statusEl = document.getElementById("status");
 const ivaInput = document.getElementById("ivaInput");
 const limpiarBtn = document.getElementById("limpiarBtn");
+const coincidenciasEl = document.getElementById('coincidencias');
 
 function decodeLatin1(str) {
   // Decodifica caracteres mal codificados (ej: Cl�sica -> Clásica)
@@ -222,9 +223,11 @@ async function buscarCodigo() {
   if (!c) {
     resultsEl.innerHTML = "";
     statusEl.textContent = "";
+    const coincidenciasEl = document.getElementById('coincidencias');
+    if (coincidenciasEl) coincidenciasEl.textContent = "";
     return;
   }
-  statusEl.textContent = "Buscando...";
+  //statusEl.textContent = "Buscando...";
   resultsEl.innerHTML = "";
 
   if (!productosCache) {
@@ -256,6 +259,8 @@ async function buscarDescripcion() {
   if (!q) {
     resultsEl.innerHTML = "";
     statusEl.textContent = "";
+    const coincidenciasEl = document.getElementById('coincidencias');
+    if (coincidenciasEl) coincidenciasEl.textContent = "";
     return;
   }
   //statusEl.textContent = "Buscando...";
