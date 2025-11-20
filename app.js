@@ -46,36 +46,55 @@ if (scanCodigoBtn) {
       scannerDiv.style.position = "relative";
       scannerDiv.appendChild(lineaRoja);
 
-      // Inicializar el escáner optimizado para códigos de barras (EAN13)
-      const html5QrCode = new Html5Qrcode("scanner-container");
-      const config = {
-        fps: 10,
-        qrbox: { width: 350, height: 350 },
-        formatsToSupport: [
-          Html5QrcodeSupportedFormats.EAN_13,
-          Html5QrcodeSupportedFormats.CODE_128,
-          Html5QrcodeSupportedFormats.CODE_39,
-          Html5QrcodeSupportedFormats.UPC_A,
-          Html5QrcodeSupportedFormats.UPC_E,
-          Html5QrcodeSupportedFormats.EAN_8
-        ]
-      };
-      html5QrCode.start(
-        { facingMode: "environment" },
-        config,
-        (decodedText, decodedResult) => {
-          // Cuando se escanea un código, ponerlo en el input y detener el escáner
-          codigoInput.value = decodedText;
-          html5QrCode.stop();
-          scannerDiv.innerHTML = "";
-          buscarCodigo();
-        },
-        (errorMessage) => {
-          // Puedes mostrar errores si lo deseas
-        }
-      ).catch((err) => {
-        scannerDiv.innerHTML = "No se pudo iniciar el escáner.";
-      });
+      // Agregar contenedor de video para QuaggaJS
+      const videoContainer = document.createElement("div");
+      videoContainer.id = "quagga-video";
+      videoContainer.style.width = "100%";
+      videoContainer.style.height = "100%";
+      scannerDiv.appendChild(videoContainer);
+
+      // Mensaje de ayuda
+      const ayuda = document.createElement("div");
+      ayuda.textContent = "Enfoca el código de barras en la línea roja. Si está borroso, acerca o aleja la cámara.";
+      ayuda.style.textAlign = "center";
+      ayuda.style.fontSize = "1em";
+      ayuda.style.marginTop = "8px";
+      ayuda.style.color = "#d32f2f";
+      scannerDiv.appendChild(ayuda);
+
+      // Inicializar QuaggaJS
+      if (window.Quagga) {
+        window.Quagga.init({
+          inputStream: {
+            name: "Live",
+            type: "LiveStream",
+            target: videoContainer,
+            constraints: {
+              facingMode: "environment"
+            }
+          },
+          decoder: {
+            readers: ["ean_reader", "ean_8_reader", "upc_reader", "upc_e_reader", "code_128_reader", "code_39_reader"]
+          },
+          locate: true
+        }, function(err) {
+          if (err) {
+            scannerDiv.innerHTML = "No se pudo iniciar el escáner.";
+            return;
+          }
+          window.Quagga.start();
+        });
+        window.Quagga.onDetected(function(result) {
+          if (result && result.codeResult && result.codeResult.code) {
+            codigoInput.value = result.codeResult.code;
+            window.Quagga.stop();
+            scannerDiv.innerHTML = "";
+            buscarCodigo();
+          }
+        });
+      } else {
+        scannerDiv.innerHTML = "QuaggaJS no está cargado. Agrega la librería en el HTML.";
+      }
     };
   }
 }
