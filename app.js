@@ -219,7 +219,11 @@ function renderProducto(prod) {
 
 async function buscarCodigo() {
   const c = codigoInput.value.trim();
-  if (!c) return;
+  if (!c) {
+    resultsEl.innerHTML = "";
+    statusEl.textContent = "";
+    return;
+  }
   statusEl.textContent = "Buscando...";
   resultsEl.innerHTML = "";
 
@@ -237,7 +241,11 @@ async function buscarCodigo() {
 
 async function buscarDescripcion() {
   const q = descripcionInput.value.trim().toLowerCase();
-  if (!q) return;
+  if (!q) {
+    resultsEl.innerHTML = "";
+    statusEl.textContent = "";
+    return;
+  }
   statusEl.textContent = "Buscando...";
   resultsEl.innerHTML = "";
 
@@ -261,6 +269,14 @@ limpiarBtn.onclick = () => {
   codigoInput.value = "";
   descripcionInput.value = "";
   descripcionInput.focus();
+  // Si QuaggaJS está activo, detener y limpiar el escáner
+  const scannerDiv = document.getElementById("scanner-container");
+  if (window.Quagga && scannerDiv && scannerDiv.childElementCount > 0) {
+    try {
+      window.Quagga.stop();
+    } catch {}
+    scannerDiv.innerHTML = "";
+  }
 };
 
 // Descargar y cachear productos al cargar la página
