@@ -32,15 +32,37 @@ if (scanCodigoBtn) {
         document.body.appendChild(scannerDiv);
       }
       scannerDiv.innerHTML = ""; // Limpiar contenido previo
+      // Agregar línea roja centrada para alineación
+      const lineaRoja = document.createElement("div");
+      lineaRoja.style.position = "absolute";
+      lineaRoja.style.top = "50%";
+      lineaRoja.style.left = "50%";
+      lineaRoja.style.transform = "translate(-50%, -50%)";
+      lineaRoja.style.width = "350px";
+      lineaRoja.style.height = "2px";
+      lineaRoja.style.background = "red";
+      lineaRoja.style.zIndex = "10";
+      lineaRoja.id = "linea-roja-barcode";
+      scannerDiv.style.position = "relative";
+      scannerDiv.appendChild(lineaRoja);
 
-      // Inicializar el escáner con área más grande
+      // Inicializar el escáner optimizado para códigos de barras (EAN13)
       const html5QrCode = new Html5Qrcode("scanner-container");
+      const config = {
+        fps: 10,
+        qrbox: { width: 350, height: 350 },
+        formatsToSupport: [
+          Html5QrcodeSupportedFormats.EAN_13,
+          Html5QrcodeSupportedFormats.CODE_128,
+          Html5QrcodeSupportedFormats.CODE_39,
+          Html5QrcodeSupportedFormats.UPC_A,
+          Html5QrcodeSupportedFormats.UPC_E,
+          Html5QrcodeSupportedFormats.EAN_8
+        ]
+      };
       html5QrCode.start(
         { facingMode: "environment" },
-        {
-          fps: 10,
-          qrbox: { width: 350, height: 350 }
-        },
+        config,
         (decodedText, decodedResult) => {
           // Cuando se escanea un código, ponerlo en el input y detener el escáner
           codigoInput.value = decodedText;
