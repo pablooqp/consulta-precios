@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Buscador Productos</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div id="leyenda-fecha" style="position:absolute;top:12px;right:32px;font-size:0.7em;color:#555;text-align:right;"></div>
+    <h1 style="text-align:center;">Consulta Precios</h1>
+
+    <div class="row" style="position:relative;">
+      <input id="descripcionInput" type="text" placeholder="Descripción" style="padding-left:60px;" />
+      <span style="position:absolute;left:6px;top:50%;transform:translateY(-50%);height:50%;display:flex;align-items:center;font-size:1.1em;color:#888;pointer-events:none;filter:grayscale(1);">
+        &#128221;
+      </span>
+    </div>
+
+    <div class="row" style="position:relative;">
+      <input id="codigoInput" type="text" placeholder="Código" style="padding-left:60px;" />
+      <span style="position:absolute;left:6px;top:50%;transform:translateY(-50%);height:50%;display:flex;align-items:center;font-size:1.1em;color:#888;pointer-events:none;filter:grayscale(1);">
+        &#128230;
+      </span>
+      <button id="scanCodigoBtn" style="display:none;margin-left:10px;">Escanear</button>
+    </div>
+    <!-- contenedor escáner eliminado -->
+
+    <div class="row">
+      <button id="limpiarBtn">Limpiar</button>
+    </div>
+
+    <div id="status"></div>
+    <div id="results"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

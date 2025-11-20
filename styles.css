@@ -1,0 +1,96 @@
+
+body {
+	font-family: sans-serif;
+	background: #f4f4f4;
+	padding: 21px;
+	font-size: 1.44em;
+}
+
+.container {
+	background: white;
+	padding: 32px;
+	border-radius: 14px;
+	max-width: 805px;
+	margin: auto;
+	box-sizing: border-box;
+	position: relative;
+}
+
+#leyenda-fecha {
+	position: absolute;
+	top: 12px;
+	right: 32px;
+	font-size: 0.7em;
+	color: #555;
+	text-align: right;
+	z-index: 10;
+}
+
+.row {
+	margin-bottom: 10px;
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+input {
+	flex: 1;
+	padding: 18px;
+	font-size: 1.44em;
+	border-radius: 8px;
+	border: 1.7px solid #bbb;
+	min-width: 0;
+}
+
+button {
+	padding: 16px 25px;
+	font-size: 1.44em;
+	border-radius: 8px;
+	border: none;
+	background: #1976d2;
+	color: #fff;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+button:hover {
+	background: #1565c0;
+}
+
+.card {
+	padding: 21px;
+	background: #eef;
+	border-radius: 12px;
+	margin-top: 18px;
+	box-shadow: 0 2px 14px rgba(0,0,0,0.09);
+	font-size: 1.32em;
+}
+
+@media (max-width: 600px) {
+	body {
+		font-size: 1.27em;
+		padding: 5px;
+	}
+	.container {
+		padding: 12px;
+		max-width: 100vw;
+		border-radius: 0;
+	}
+	.row {
+		flex-direction: column;
+		gap: 9px;
+	}
+	input, button {
+		font-size: 1.32em;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 16px;
+	}
+	.card {
+		font-size: 1.24em;
+		padding: 16px;
+	}
+	h1 {
+		font-size: 1.72em;
+		text-align: center;
+	}
+}
