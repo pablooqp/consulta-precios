@@ -331,7 +331,7 @@ window.addEventListener("DOMContentLoaded", async () => {
           const mm = String(fecha.getMinutes()).padStart(2, '0');
           const ss = String(fecha.getSeconds()).padStart(2, '0');
           const fechaFormateada = `${yyyy}-${MM}-${dd} ${hh}:${mm}:${ss}`;
-          leyenda.textContent = `Actualización: ${fechaFormateada}`;
+          leyenda.innerHTML = `&#128260; ${fechaFormateada}`;
         }
       }
     } catch (e) {
