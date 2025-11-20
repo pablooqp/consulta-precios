@@ -164,17 +164,16 @@ function renderProducto(prod) {
 
   div.innerHTML = `
     <div style="position:relative;">
-      <span style="position:absolute;top:0;left:0;font-size:0.66em;font-weight:bold;color:#555;">${
-        prod.CODIGO
-      }</span>
+      <span class="chip-codigo" title="Copiar código" style="position:absolute;top:0;left:0;font-size:0.8em;font-weight:bold;color:#fff;background:#1976d2;border-radius:12px;padding:2px 14px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.10);user-select:none;transition:background 0.2s;">
+        ${prod.CODIGO}
+      </span>
       <div style="display:flex;flex-direction:column;">
-              <div style="display:flex;align-items:center;justify-content:flex-end;">
+        <div style="display:flex;align-items:center;justify-content:flex-end;">
           <button class="copiar-btn" title="Copiar" style="font-size:0.9em;padding:4px 10px;margin-left:10px;cursor:pointer;">📋</button>
         </div>
         <span style="font-size:1.1em;font-weight:bold;margin-bottom:4px;">
           ${descripcionUTF8}
         </span>
-
       </div>
     </div>
     <div style="font-size:2em;color:#1976d2;font-weight:bold;margin-bottom:8px;">
@@ -182,10 +181,9 @@ function renderProducto(prod) {
     </div>
   `;
 
-  // Funcionalidad copiar
+  // Funcionalidad copiar para el botón principal
   const btn = div.querySelector(".copiar-btn");
   btn.onclick = () => {
-    // Método moderno
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(textoCopiar).then(() => {
         btn.textContent = "✔";
@@ -194,7 +192,6 @@ function renderProducto(prod) {
         }, 1200);
       });
     } else {
-      // Método alternativo para navegadores sin clipboard API
       const temp = document.createElement("textarea");
       temp.value = textoCopiar;
       temp.setAttribute("readonly", "");
@@ -214,6 +211,43 @@ function renderProducto(prod) {
       document.body.removeChild(temp);
     }
   };
+
+  // Funcionalidad copiar para el chip de código
+  const chip = div.querySelector('.chip-codigo');
+  if (chip) {
+    chip.onclick = () => {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(prod.CODIGO).then(() => {
+          chip.style.background = '#43a047';
+          chip.textContent = '✔ Copiado';
+          setTimeout(() => {
+            chip.style.background = '#1976d2';
+            chip.textContent = prod.CODIGO;
+          }, 1200);
+        });
+      } else {
+        const temp = document.createElement('textarea');
+        temp.value = prod.CODIGO;
+        temp.setAttribute('readonly', '');
+        temp.style.position = 'absolute';
+        temp.style.left = '-9999px';
+        document.body.appendChild(temp);
+        temp.select();
+        try {
+          document.execCommand('copy');
+          chip.style.background = '#43a047';
+          chip.textContent = '✔ Copiado';
+          setTimeout(() => {
+            chip.style.background = '#1976d2';
+            chip.textContent = prod.CODIGO;
+          }, 1200);
+        } catch (e) {
+          alert('No se pudo copiar');
+        }
+        document.body.removeChild(temp);
+      }
+    };
+  }
 
   return div;
 }
