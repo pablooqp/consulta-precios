@@ -25,17 +25,21 @@ if (scanCodigoBtn) {
         scannerDiv = document.createElement("div");
         scannerDiv.id = "scanner-container";
         scannerDiv.style.marginTop = "16px";
+        scannerDiv.style.width = "100vw";
+        scannerDiv.style.maxWidth = "500px";
+        scannerDiv.style.height = "400px";
+        scannerDiv.style.margin = "0 auto";
         document.body.appendChild(scannerDiv);
       }
       scannerDiv.innerHTML = ""; // Limpiar contenido previo
 
-      // Inicializar el escáner
+      // Inicializar el escáner con área más grande
       const html5QrCode = new Html5Qrcode("scanner-container");
       html5QrCode.start(
         { facingMode: "environment" },
         {
           fps: 10,
-          qrbox: 250
+          qrbox: { width: 350, height: 350 }
         },
         (decodedText, decodedResult) => {
           // Cuando se escanea un código, ponerlo en el input y detener el escáner
