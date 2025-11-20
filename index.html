@@ -1,42 +1,73 @@
 <!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8" />
   <title>Buscador Productos</title>
   <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
 </head>
-<body>
-  <div class="container">
-    <div id="leyenda-fecha" style="position:absolute;top:4px;right:8px;padding:1px 5px;border-radius:3px;background:rgba(33,33,33,0.92);color:#fff;font-size:0.58em;font-family:monospace;box-shadow:0 1px 2px rgba(0,0,0,0.08);letter-spacing:1px;text-align:right;display:inline-block;min-width:60px;border:1px solid #222;">
-    </div>
-    <h1 style="text-align:center;">Consulta Precios</h1>
 
-    <div class="row" style="position:relative;">
-      <input id="descripcionInput" type="text" placeholder="Descripción" style="padding-left:60px;" />
-      <span style="position:absolute;left:6px;top:50%;transform:translateY(-50%);height:50%;display:flex;align-items:center;font-size:1.1em;color:#888;pointer-events:none;filter:grayscale(1);">
+<body>
+  <div class="container"
+    style="width:60vw;max-width:700px;margin:40px auto 0 auto;padding:32px 18px 24px 18px;background:#fff;border-radius:18px;box-shadow:0 4px 24px rgba(0,0,0,0.10);position:relative;">
+    <div id="leyenda-fecha"
+      style="position:absolute;top:4px;right:8px;padding:1px 5px;border-radius:3px;background:rgba(33,33,33,0.92);color:#fff;font-size:0.58em;font-family:monospace;box-shadow:0 1px 2px rgba(0,0,0,0.08);letter-spacing:1px;text-align:right;display:inline-block;min-width:60px;border:1px solid #222;cursor:pointer;user-select:none;"
+      title="Refrescar pantalla"></div>
+    <h1 style="text-align:center;font-size:2em;font-weight:700;margin-bottom:28px;color:#222;letter-spacing:1px;">
+      Consulta Precios</h1>
+  <style>
+    h1 {
+      font-family: 'Montserrat', sans-serif !important;
+      font-weight: 700 !important;
+      letter-spacing: 1px;
+    }
+  </style>
+
+    <div class="row" style="position:relative;margin-bottom:18px;">
+      <input id="descripcionInput" type="text" placeholder="Descripción"
+        style="padding-left:48px;height:40px;font-size:1em;border-radius:8px;border:1px solid #bbb;width:100%;box-sizing:border-box;" />
+      <span
+        style="position:absolute;left:12px;top:50%;transform:translateY(-50%);height:50%;display:flex;align-items:center;font-size:1.2em;color:#888;pointer-events:none;filter:grayscale(1);">
         &#128221;
       </span>
     </div>
 
-    <div class="row" style="position:relative;">
-      <input id="codigoInput" type="text" placeholder="Código" style="padding-left:60px;" />
-      <span style="position:absolute;left:6px;top:50%;transform:translateY(-50%);height:50%;display:flex;align-items:center;font-size:1.1em;color:#888;pointer-events:none;filter:grayscale(1);">
+    <div class="row" style="position:relative;margin-bottom:18px;">
+      <input id="codigoInput" type="text" placeholder="Código"
+        style="padding-left:48px;height:40px;font-size:1em;border-radius:8px;border:1px solid #bbb;width:100%;box-sizing:border-box;" />
+      <span
+        style="position:absolute;left:12px;top:50%;transform:translateY(-50%);height:50%;display:flex;align-items:center;font-size:1.2em;color:#888;pointer-events:none;filter:grayscale(1);">
         &#128230;
       </span>
-      <button id="scanCodigoBtn" style="display:none;margin-left:10px;">Escanear</button>
-    </div>
-    <!-- contenedor escáner eliminado -->
-
-    <div class="row">
-      <button id="limpiarBtn">Limpiar</button>
+      <button id="scanCodigoBtn"
+        style="display:none;margin-left:10px;position:absolute;right:0;top:50%;transform:translateY(-50%);height:32px;padding:0 16px;border-radius:8px;background:#1976d2;color:#fff;border:none;font-size:1em;cursor:pointer;">Escanear</button>
     </div>
 
-    <div id="status"></div>
-    <div id="results"></div>
+    <div class="row" style="text-align:center;margin-bottom:18px;">
+      <button id="limpiarBtn"
+        style="height:36px;padding:0 32px;border-radius:8px;background:#e0e0e0;color:#222;border:none;font-size:1em;cursor:pointer;">Limpiar</button>
+    </div>
+    <div id="coincidencias"
+      style="height:24px;margin-bottom:2px;text-align:right;font-size:1.1em;color:#1976d2;font-weight:bold;"></div>
+    <div id="status" style="text-align:center;font-size:1em;color:#d32f2f;margin-bottom:10px;"></div>
+
+    <div id="results" style="margin-top:8px;"></div>
   </div>
 
   <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var leyenda = document.getElementById('leyenda-fecha');
+      if (leyenda) {
+        leyenda.onclick = function () {
+          window.location.reload();
+        };
+      }
+    });
+  </script>
 </body>
+
 </html>

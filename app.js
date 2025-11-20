@@ -236,7 +236,19 @@ async function buscarCodigo() {
     (p) => String(p.CODIGO).trim().includes(c)
   );
   encontrados.forEach((p) => resultsEl.appendChild(renderProducto(p)));
-  statusEl.textContent = "";
+  // Mostrar cantidad de coincidencias en el div 'coincidencias'
+  const coincidenciasEl = document.getElementById('coincidencias');
+  if (coincidenciasEl) {
+    if (c && encontrados.length > 0) {
+      if (encontrados.length === 1) {
+        coincidenciasEl.textContent = '1 registro';
+      } else {
+        coincidenciasEl.textContent = `${encontrados.length} registros`;
+      }
+    } else {
+      coincidenciasEl.textContent = "";
+    }
+  }
 }
 
 async function buscarDescripcion() {
@@ -246,7 +258,7 @@ async function buscarDescripcion() {
     statusEl.textContent = "";
     return;
   }
-  statusEl.textContent = "Buscando...";
+  //statusEl.textContent = "Buscando...";
   resultsEl.innerHTML = "";
 
   if (!productosCache) {
@@ -258,7 +270,19 @@ async function buscarDescripcion() {
     decodeLatin1(p.DESCRIPCION).toLowerCase().includes(q)
   );
   encontrados.forEach((p) => resultsEl.appendChild(renderProducto(p)));
-  statusEl.textContent = "";
+  // Mostrar cantidad de coincidencias en el div 'coincidencias'
+  const coincidenciasEl = document.getElementById('coincidencias');
+  if (coincidenciasEl) {
+    if (q && encontrados.length > 0) {
+      if (encontrados.length === 1) {
+        coincidenciasEl.textContent = '1 registro';
+      } else {
+        coincidenciasEl.textContent = `${encontrados.length} registros`;
+      }
+    } else {
+      coincidenciasEl.textContent = "";
+    }
+  }
 }
 
 descripcionInput.addEventListener("input", buscarDescripcion);
@@ -268,6 +292,8 @@ limpiarBtn.onclick = () => {
   statusEl.textContent = "";
   codigoInput.value = "";
   descripcionInput.value = "";
+  const coincidenciasEl = document.getElementById('coincidencias');
+  if (coincidenciasEl) coincidenciasEl.textContent = "";
   descripcionInput.focus();
   // Si QuaggaJS está activo, detener y limpiar el escáner
   const scannerDiv = document.getElementById("scanner-container");
