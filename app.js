@@ -181,7 +181,7 @@ function renderProducto(prod) {
         </span>
       </div>
     </div>
-    <div style="font-size:2em;color:#1976d2;font-weight:bold;margin-bottom:8px;">
+    <div style="font-size:2em;color:#1976d2;font-weight:bold;margin-bottom:8px;text-align:center;">
       ${formatoCLP(pVenta)}
     </div>
   `;
@@ -283,9 +283,9 @@ async function buscarCodigo() {
   if (coincidenciasEl) {
     if (c && encontrados.length > 0) {
       if (encontrados.length === 1) {
-        coincidenciasEl.textContent = '1 registro';
+        coincidenciasEl.textContent = `1 registro de ${productosCache.data.length}`;
       } else {
-        coincidenciasEl.textContent = `${encontrados.length} registros`;
+        coincidenciasEl.textContent = `${encontrados.length} registros de ${productosCache.data.length}`;
       }
     } else {
       coincidenciasEl.textContent = "";
@@ -319,9 +319,9 @@ async function buscarDescripcion() {
   if (coincidenciasEl) {
     if (q && encontrados.length > 0) {
       if (encontrados.length === 1) {
-        coincidenciasEl.textContent = '1 registro';
+        coincidenciasEl.textContent = `1 registro de ${productosCache.data.length}`;
       } else {
-        coincidenciasEl.textContent = `${encontrados.length} registros`;
+        coincidenciasEl.textContent = `${encontrados.length} registros de ${productosCache.data.length}`;
       }
     } else {
       coincidenciasEl.textContent = "";
