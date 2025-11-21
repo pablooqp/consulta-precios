@@ -164,14 +164,19 @@ function renderProducto(prod) {
 
   div.innerHTML = `
     <div style="position:relative;">
-      <span class="chip-codigo" title="Copiar código" style="position:absolute;top:0;left:0;font-size:0.8em;font-weight:bold;color:#fff;background:#1976d2;border-radius:12px;padding:2px 14px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.10);user-select:none;transition:background 0.2s;">
+      <span class="chip-codigo" title="Copiar código" style="position:absolute;top:0;left:0;font-size:0.5em;font-weight:bold;color:#fff;background:#1976d2;border-radius:8px;padding:2px 8px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.10);user-select:none;transition:background 0.2s;height:15px;display:flex;align-items:center;">
         ${prod.CODIGO}
       </span>
       <div style="display:flex;flex-direction:column;">
         <div style="display:flex;align-items:center;justify-content:flex-end;">
-          <button class="copiar-btn" title="Copiar" style="font-size:0.9em;padding:4px 10px;margin-left:10px;cursor:pointer;">📋</button>
+          <span class="copiar-btn" title="Copiar" style="margin-left:10px;cursor:pointer;display:inline-flex;align-items:center;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="none" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="10" height="13" rx="2" ry="2" fill="#e0e0e0" stroke="#888"/>
+              <rect x="5" y="3" width="10" height="13" rx="2" ry="2" fill="#fff" stroke="#888"/>
+            </svg>
+          </span>
         </div>
-        <span style="font-size:1.1em;font-weight:bold;margin-bottom:4px;">
+        <span style="font-size:1.1em;font-weight:bold;margin-bottom:4px;margin-top:4px;">
           ${descripcionUTF8}
         </span>
       </div>
@@ -186,9 +191,9 @@ function renderProducto(prod) {
   btn.onclick = () => {
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(textoCopiar).then(() => {
-        btn.textContent = "✔";
+        btn.innerHTML = `<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"30\" height=\"30\" fill=\"none\" stroke=\"#888\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"8,16 14,22 24,8\"/></svg>`;
         setTimeout(() => {
-          btn.textContent = "📋";
+          btn.innerHTML = `<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"30\" height=\"30\" fill=\"none\" stroke=\"#888\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"9\" y=\"9\" width=\"10\" height=\"13\" rx=\"2\" ry=\"2\" fill=\"#e0e0e0\" stroke=\"#888\"/><rect x=\"5\" y=\"3\" width=\"10\" height=\"13\" rx=\"2\" ry=\"2\" fill=\"#fff\" stroke=\"#888\"/></svg>`;
         }, 1200);
       });
     } else {
@@ -201,9 +206,9 @@ function renderProducto(prod) {
       temp.select();
       try {
         document.execCommand("copy");
-        btn.textContent = "✔";
+        btn.innerHTML = `<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"30\" height=\"30\" fill=\"none\" stroke=\"#888\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"8,16 14,22 24,8\"/></svg>`;
         setTimeout(() => {
-          btn.textContent = "📋";
+          btn.innerHTML = `<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"30\" height=\"30\" fill=\"none\" stroke=\"#888\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"9\" y=\"9\" width=\"10\" height=\"13\" rx=\"2\" ry=\"2\" fill=\"#e0e0e0\" stroke=\"#888\"/><rect x=\"5\" y=\"3\" width=\"10\" height=\"13\" rx=\"2\" ry=\"2\" fill=\"#fff\" stroke=\"#888\"/></svg>`;
         }, 1200);
       } catch (e) {
         alert("No se pudo copiar");
@@ -346,6 +351,10 @@ limpiarBtn.onclick = () => {
 
 // Descargar y cachear productos al cargar la página
 window.addEventListener("DOMContentLoaded", async () => {
+  // Agregar SVG al botón Limpiar si no existe
+  if (limpiarBtn && !limpiarBtn.querySelector('svg')) {
+    limpiarBtn.innerHTML = `Limpiar`;
+  }
   limpiarBtn.click();
   if (!productosDescargados) {
     try {

@@ -12,7 +12,7 @@
 
 <body>
   <div class="container"
-    style="width:60vw;max-width:700px;margin:40px auto 0 auto;padding:32px 18px 24px 18px;background:#fff;border-radius:18px;box-shadow:0 4px 24px rgba(0,0,0,0.10);position:relative;zoom:1.4;">
+    style="width:60vw;max-width:700px;margin:40px auto 0 auto;padding:32px 18px 24px 18px;background:#f7f7f7;border-radius:18px;box-shadow:0 4px 24px rgba(0,0,0,0.10);position:relative;zoom:1.4;">
     <div id="leyenda-fecha"
       style="position:absolute;top:4px;right:8px;padding:1.21px 6.05px;border-radius:3px;background:rgba(33,33,33,0.92);color:#fff;font-size:0.702em;font-family:monospace;box-shadow:0 1px 2px rgba(0,0,0,0.08);letter-spacing:1px;text-align:right;display:inline-block;min-width:72px;border:1px solid #222;cursor:pointer;user-select:none;"
       title="Refrescar pantalla"></div>
@@ -31,7 +31,12 @@
         style="padding-left:48px;height:40px;font-size:1em;border-radius:8px;border:1px solid #bbb;width:100%;box-sizing:border-box;" />
       <span
         style="position:absolute;left:12px;top:50%;transform:translateY(-50%);height:50%;display:flex;align-items:center;font-size:1.2em;color:#888;pointer-events:none;filter:grayscale(1);">
-        &#128221;
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+          <rect x="4" y="4" width="16" height="16" rx="3" fill="#e0e0e0"/>
+          <rect x="7" y="8" width="10" height="2" rx="1" fill="#888"/>
+          <rect x="7" y="12" width="7" height="2" rx="1" fill="#888"/>
+          <rect x="7" y="16" width="5" height="2" rx="1" fill="#888"/>
+        </svg>
       </span>
     </div>
 
@@ -40,7 +45,14 @@
         style="padding-left:48px;height:40px;font-size:1em;border-radius:8px;border:1px solid #bbb;width:100%;box-sizing:border-box;" />
       <span
         style="position:absolute;left:12px;top:50%;transform:translateY(-50%);height:50%;display:flex;align-items:center;font-size:1.2em;color:#888;pointer-events:none;filter:grayscale(1);">
-        &#128230;
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+          <rect x="2" y="6" width="2" height="12" fill="#888"/>
+          <rect x="6" y="6" width="1" height="12" fill="#888"/>
+          <rect x="9" y="6" width="2" height="12" fill="#888"/>
+          <rect x="13" y="6" width="1" height="12" fill="#888"/>
+          <rect x="16" y="6" width="2" height="12" fill="#888"/>
+          <rect x="20" y="6" width="1" height="12" fill="#888"/>
+        </svg>
       </span>
       <button id="scanCodigoBtn"
         style="display:none;margin-left:10px;position:absolute;right:0;top:50%;transform:translateY(-50%);height:32px;padding:0 16px;border-radius:8px;background:#1976d2;color:#fff;border:none;font-size:1em;cursor:pointer;">Escanear</button>
@@ -51,7 +63,7 @@
         style="height:36px;padding:0 32px;border-radius:8px;background:#e0e0e0;color:#222;border:none;font-size:1em;cursor:pointer;">Limpiar</button>
     </div>
     <div id="coincidencias"
-      style="margin-bottom:2px;text-align:right;font-size:0.7em;color:#1976d2;font-weight:bold;word-break:normal;white-space:normal;max-width:100%;">
+      style="margin-bottom:2px;text-align:right;font-size:0.7em;color:#203391;font-weight:bold;word-break:normal;white-space:normal;max-width:100%;">
     </div>
     <div id="status" style="text-align:center;font-size:1em;color:#d32f2f;margin-bottom:10px;"></div>
 

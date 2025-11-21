@@ -1,7 +1,7 @@
 
 body {
 	font-family: sans-serif;
-	background: #f4f4f4;
+	background: #9f9f9f;
 	padding: 21px;
 	font-size: 1.44em;
 }
@@ -58,7 +58,7 @@ button:hover {
 
 .card {
 	padding: 21px;
-	background: #eef;
+	background: #fff;
 	border-radius: 12px;
 	margin-top: 18px;
 	box-shadow: 0 2px 14px rgba(0,0,0,0.09);
