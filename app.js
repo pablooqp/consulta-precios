@@ -164,7 +164,7 @@ function renderProducto(prod) {
 
   div.innerHTML = `
     <div style="position:relative;">
-      <span class="chip-codigo" title="Copiar código" style="position:absolute;top:0;left:0;font-size:0.5em;font-weight:bold;color:#fff;background:#1976d2;border-radius:8px;padding:2px 8px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.10);user-select:none;transition:background 0.2s;height:15px;display:flex;align-items:center;">
+      <span class="chip-codigo" title="Copiar código" style="position:absolute;top:0;left:0;font-size:0.8em;font-weight:bold;color:#fff;background:#1976d2;border-radius:8px;padding:2px 12px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.10);user-select:none;transition:background 0.2s;height:26px;display:flex;align-items:center;">
         ${prod.CODIGO}
       </span>
       <div style="display:flex;flex-direction:column;">
