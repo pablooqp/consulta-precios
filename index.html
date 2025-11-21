@@ -64,6 +64,10 @@
       var leyenda = document.getElementById('leyenda-fecha');
       if (leyenda) {
         leyenda.onclick = function () {
+          // Limpiar productosCache antes de recargar
+          if (window.productosCache) {
+            window.productosCache = null;
+          }
           window.location.reload();
         };
       }
